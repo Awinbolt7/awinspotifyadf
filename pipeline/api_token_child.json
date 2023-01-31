@@ -1,0 +1,46 @@
+{
+	"name": "api_token_child",
+	"properties": {
+		"activities": [
+			{
+				"name": "post_token",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://accounts.spotify.com/api/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": {
+						"value": "@concat('grant_type=',pipeline().parameters.grant_type,'&client_id=',pipeline().parameters.client_id,'&client_secret=',pipeline().parameters.client_secret)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"grant_type": {
+				"type": "string",
+				"defaultValue": "client_credentials"
+			},
+			"client_secret": {
+				"type": "string",
+				"defaultValue": "8f015264f7584942b3cf3aa5f67621ad"
+			},
+			"client_id": {
+				"type": "string",
+				"defaultValue": "9b758b33a88e4844ba79c0fe9762f70d"
+			}
+		},
+		"annotations": []
+	}
+}
